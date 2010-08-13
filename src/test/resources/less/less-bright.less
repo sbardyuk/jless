@@ -1,0 +1,344 @@
+/* TODO: Clarify what we do when we port an old client to new features */
+
+/* TODO: We'll need to manually port 4.4 features into less files */
+
+/* TODO: Provide documentation to dev for building 4.5 features */
+
+/* TODO: Camel case suffixes */
+
+/* THIS IS SO WE CAN SEE CRAP! */
+
+/*
+* Use this type of logic across all tiers - should we use less?
+** Define when changes should happen in less-template.less vs. when changes should happen in bazaarvoice.less.
+*/
+
+/* ---------------------------------------------- */
+/* ---------- GLOBAL ---------------------------- */
+/* ---------------------------------------------- */
+
+
+/* FONT FAMILY */
+.less_text_fontFamily {font-family: tahoma, arial, sans-serif;}
+/* build loads of better font stacks yaye */
+
+
+/* FONT SIZES */
+.less_text_size1 {font-size: 24px;} /* page titles */
+.less_text_size2 {font-size: 20px;} /* section headers */
+.less_text_size3 {font-size: 18px;} /* review titles */
+.less_text_size4 {font-size: 14px;} /* nickname */
+.less_text_size5 {font-size: 12px;} /* ugc text */
+.less_text_size6 {font-size: 10px;} /* date, helper text, etc */
+
+
+/* EXTRAS */
+.less_text_emphasis {font-style: italic;}
+.less_text_strong {font-weight: bold;}
+
+/* TODO: Be more explicit about purpose of color structure */
+
+/* COLOR VARIABLES -- do we want to define these? */
+@less_text_colorNormal: #56002a; /* normal */
+@less_text_colorHigh: #ffac1b; /* high */
+@less_text_colorMeta: #99004c; /* meta */
+@less_text_colorLow: #e80073; /* low */
+@less_text_colorAlertBad: #d68800; /* alert/error */
+@less_text_colorAlertGood: #77A940; /* good alert */
+@less_text_colorLink: #a9d357; /* link */
+@less_text_colorHover: #ffac1b; /* hover/focus */
+/* reversed out font colors: keep these light for legibility on dark backgrounds */
+@less_text_colorBtnSecondary: #eee; /* secondary btn text */
+@less_text_colorBtnPrimary: #fff; /* primary btn text */
+
+
+/* Box colors (colors for visual elements like backgrounds, borders, and buttons) */
+/* Base color */
+@less_box_colorBase: #fffbfd; /* The basic background color, normally white */
+@less_box_colorPrimaryFadedest: #fce4f0; /* low contrast shade of primary color */
+@less_box_colorPrimaryFadeder: #f4c8de; /* medium contrast shade of primary color */
+@less_box_colorPrimaryFaded: #ffb9db; /* slightly higher contrast shade of primary color */
+@less_box_colorPrimaryMain: @less_text_colorNormal; /* the primary color of the client site at full strength, dark enough to put behind light text */
+@less_box_colorAccent: @less_text_colorHigh; /* accent color: primarily used for vivid, small things like certain borders */
+/* reversed out, contrasty colors: by default these are dark for legibility with light text, mainly used for buttons */
+@less_box_colorBtnSecondary: #a9d357; /* background for secondary, lower-contrast buttons */
+@less_box_colorBtnPrimary: #86ad39; /* background for primary, hi-contrast buttons */
+
+/* TODO: Clean up border mixins */
+/* border-styles */
+.less_box_border {border-style: solid;}
+
+/* border-widths */
+.less_box_borderWidth0 {border-width: 0;} /* no border */
+.less_box_borderWidthSmall {border-width: 1px;} /* all sides! 1px */
+.less_box_borderWidthLarge {border-width: 3px;} /* all sides 3px */
+.less_box_borderTop {border-width: 1px 0 0;} /* (used in list items) */
+.less_box_borderRight {border-width: 0 1px 0 0;} /* (used in list items) */
+.less_box_borderBottom {border-width: 0 0 1px;} /* (used in list items) */
+.less_box_borderLeft {border-width: 0 0 0 1px;} /* (used in list items) */
+.less_box_borderHorizontal {border-width: 1px 0;} /* (used for standalone-ish items in a stack) */
+.less_box_borderVertical {border-width: 0 1px;} /* (used for sidebar things, not very common) */
+
+/* border-colors */
+.less_box_borderLight {.less_box_border; .less_box_borderWidthSmall; border-color: @less_box_colorPrimaryFadedest;} /* (light) */
+.less_box_borderMed {.less_box_border; .less_box_borderWidthSmall; border-style: solid; border-color: @less_box_colorPrimaryFadeder;} /* (medium) */
+.less_box_borderDark {.less_box_border; .less_box_borderWidthSmall; border-style: solid; border-color: @less_box_colorPrimaryFaded;} /* (dark) */
+.less_box_borderHighlight {.less_box_border; .less_box_borderWidthSmall; border-color: @less_text_colorHigh;} /* (highlight) */
+.less_box_borderBad {.less_box_border; .less_box_borderWidthSmall; border-color: @less_text_colorAlertBad;} /* (bad) */
+.less_box_borderGood {.less_box_border; .less_box_borderWidthSmall; border-color: @less_text_colorAlertGood;} /* (good) */
+
+
+/* ---------------------------------------------- */
+/* ---------- CSS3 ---------------------------- */
+/* ---------------------------------------------- */
+
+/* border-radius */
+.less_box_rounded {-mox-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;}
+
+
+/* box-shadow */
+.less_box_shadow (@less_shadow_offsetx: 10px, @less_shadow_offsety: 10px, @less_shadow_blur: 40px, @less_shadow_color: rgba(0,0,0,.2)) {-moz-box-shadow: @less_shadow_offsetx @less_shadow_offsety @less_shadow_blur @less_shadow_color; -webkit-box-shadow: @less_shadow_offsetx @less_shadow_offsety @less_shadow_blur @less_shadow_color; box-shadow: @less_shadow_offsetx @less_shadow_offsety @less_shadow_blur @less_shadow_color;}
+
+/* */
+.less_box_bgGradient {background: -moz-linear-gradient(top,  @less_box_colorPrimaryFadedest,  @less_box_colorBase); background: -webkit-gradient(linear, left top, left bottom, from(@less_box_colorPrimaryFadedest), to(@less_box_colorBase));}
+
+
+/* ---------------------------------------------- */
+/* ---------- FONTS ----------------------------- */
+/* ---------------------------------------------- */
+
+
+
+/* ugc */
+.less_text_body {.less_text_fontFamily; line-height: 1.5; color: @less_text_colorNormal; .less_text_size5;}
+
+
+/* meta */
+.less_text_meta {color: @less_text_colorMeta; .less_text_size5;}
+    .less_text_nickname {.less_text_size4;}
+        .less_text_linkNickname {color: @less_text_colorLink;} /* take this out? will inherit naturally? */
+    .less_text_quotedContent {}
+    .less_text_crossPromote {} /* this name sucks */
+
+
+/* helper */
+.less_text_helper {color: @less_text_colorLow; .less_text_size6;}
+    .less_text_helperForm {color: @less_text_colorLow; .less_text_size6; .less_text_emphasis;}
+    .less_text_titleHelper {color: @less_text_colorLow; .less_text_size5; .less_text_strong;} /* seo text on msvp etc */
+    .less_text_guidelines {.less_text_size6; color: @less_text_colorLow;}
+    
+    
+/* messaging */
+.less_text_message {color: @less_text_colorMeta;} /* these are just placeholders or ideas */
+    .less_text_alert {}
+    .less_text_close {}
+    .less_text_delete {}
+    .less_text_error {color: @less_text_colorAlertBad;}
+    .less_text_highlight {}
+    
+  
+  
+
+
+/* ---------------------------------------------- */
+/* ---------- TITLES ---------------------------- */
+/* ---------------------------------------------- */
+
+
+/* TODO: General to specific  */
+/* page titles */
+.less_text_titlePage {color: @less_text_colorHigh; .less_text_size1; .less_text_strong;} /*  profile, thank you, MSVP, etc. can have multiple per page. h1. */
+.less_text_titleSection {color: @less_text_colorHigh; .less_text_size2; .less_text_strong;} /* h2. secondary titles (MSVP review title), qa “product qa” title, submission step title */
+.less_text_titleItem {color: @less_text_colorHigh; .less_text_size3; .less_text_strong;} /* h3. review titles, comment titles, etc */
+.less_text_titleWidget {color: @less_text_colorHigh; .less_text_size4; .less_text_strong;}
+.less_text_titleNav {color: @less_text_colorNormal; .less_text_size4; .less_text_strong;}
+
+/* ---------------------------------------------- */
+/* ---------- LINKS ---------------------------- */
+/* ---------------------------------------------- */
+
+.less_text_link, .less_text_linkVisited {color: @less_text_colorLink; text-decoration: underline;}
+    .less_text_linkHover, .less_text_linkFocus, .less_text_linkActive {color: @less_text_colorHover; text-decoration: none;} /* how do these work? */
+
+
+/* action links */
+.less_text_linkAction, .less_text_linkActionVisited {color: @less_text_colorLink; text-decoration: none;}
+    .less_text_linkActionHover, .less_text_linkActionFocus, .less_text_linkActionActive {color: @less_text_colorHover; text-decoration: underline;}
+    
+    /* action link box styles */
+    .less_text_linkIcon {padding-left: 20px; background-image: url(iconlinks.gif); background-repeat: no-repeat; background-position: 0 0; text-decoration: none; color: @less_text_colorLink;}
+        /* can we somehow make this a percentage width or something of another style? so it changes? */
+        
+        /* define these guys w/ background sprite positioning */
+        /* icon link types */
+        .less_text_linkIconPopout {.less_text_linkIcon; background-position: 0 -1px;} /* popout opens new window, t&cs */
+        .less_text_linkIconPopin {.less_text_linkIcon; background-position: 0 -22px;} /* popin, ie histogram or profile snap, or anchor link on profile */
+        .less_text_linkIconClosed {.less_text_linkIcon; background-position: 0 -43px;} /* aa closed, etc */
+        .less_text_linkIconExpanded {.less_text_linkIcon; background-position: 0 -62px;} /* aa expanded */
+        .less_text_linkIconInfo {.less_text_linkIcon; background-position: 0 -77px;} /* info or guidelines */
+        .less_text_linkIconClose {.less_text_linkIcon; background-position: 0 -102px;} /* close */
+        .less_text_linkIconClear {.less_text_linkIcon; background-position: 0 -117px;} /* trash or delete, clear section like on active profiles, remove photo */
+
+        /* special icon links */
+        
+        /* filtering */
+        .less_text_titleFilters {.less_text_strong;} /* Filter Item title */
+            .less_text_linkIconFilter {.less_text_linkIcon; color: @less_text_colorNormal; background-position: 0 -192px;} /* filter items default */ 
+            .less_text_linkIconFilterHover {.less_text_linkIconFilter; color: @less_text_colorAlertGood; background-position: 0 -173px;} /* green hover + */
+            .less_text_linkIconFilterOn {.less_text_linkIconFilter;  color: @less_text_colorAlertGood; background-position: 0 -155px;} /* green on */
+            .less_text_linkIconFilterOnHover {.less_text_linkIconFilter;  color: @less_text_colorAlertBad; background-position: 0 -137px !important;} /* on filters red - hover to turn off */
+            .less_text_linkIconFilterDisabled {.less_text_linkIconFilter; color: @less_text_colorLow; background-position: 0 -212px;}
+            
+        /* badges */
+        .less_text_linkIconBadges {.less_text_linkIcon; color: @less_text_colorNormal;} /* badges. needs box styles */
+
+        /* different kinds of crap that we can't categorize as icon links but sorta are */
+        .less_text_linkIconShare {} /* sharing icons */
+        .less_text_linkIconHelpfulness {} /* helpfulness icon links */
+        .less_text_linkIconTabs {} /* tabs */
+        
+        
+    
+
+/* nav links -- box styles, same as action links */
+
+
+
+
+
+/* ---------------------------------------------- */
+/* ---------- BUTTONS --------------------------- */
+/* ---------------------------------------------- */
+
+/* */
+
+/* TODO: Add hover states */
+.less_box_btnLow {background-color: @less_box_colorBtnSecondary; .less_box_borderLight; .less_box_borderWidth0;}
+.less_text_btnLow {color: @less_text_colorBtnSecondary; .less_text_size4; .less_text_strong; text-decoration: none;}
+
+.less_box_btnHigh {background-color: @less_box_colorBtnPrimary; .less_box_borderLight; .less_box_borderWidth0;}
+.less_text_btnHigh {color: @less_text_colorBtnPrimary; .less_text_size4; .less_text_strong; text-decoration: none;}
+
+
+
+
+/* ---------------------------------------------- */
+/* ---------- INPUTS ---------------------------- */
+/* ---------------------------------------------- */
+
+
+/* labels */
+.less_text_labelLow {.less_text_size4; color: @less_text_colorMeta;} /* submission item labels, normal, i.e. Video */
+.less_text_labelHigh {.less_text_size3; color: @less_text_colorMeta;} /* submission item labels, primary, i.e. main item like review/question/answer, or possibly required? */
+
+
+/* inputs */
+.less_text_textInputLow {.less_text_size5; color: @less_text_colorNormal;}
+    .less_box_textInputLow {.less_box_borderMed;}
+.less_text_textInputHigh {.less_text_size4; color: @less_text_colorNormal;}
+    .less_box_textInputHigh {.less_box_borderDark; .less_box_borderWidthLarge;}
+.less_box_inputFocusLow {.less_box_borderHighlight; background-color: @less_box_colorPrimaryFadedest;}
+    .less_box_inputFocusHigh {.less_box_inputFocusLow; .less_box_borderWidthLarge;}
+.less_box_inputErrorLow {.less_box_borderBad;}
+    .less_box_inputErrorHigh {.less_box_borderBad; .less_box_borderWidthLarge;}
+
+
+
+
+/* ---------------------------------------------- */
+/* ---------- BOXES: GENERAL -------------------- */
+/* ---------------------------------------------- */
+
+
+/* TODO: Rename this to reflect that it's used for weakening selected content */
+/* Remove opacity from buttons. Add opacity to social shout it links*/
+/* opacity of quoted content and hovered buttons */
+.less_box_opacity70 {opacity: 0.7; zoom: 1; filter: alpha(opacity=70); -ms-filter: alpha(opacity=70);}
+.less_box_opacity100 {opacity: 1.0; filter: alpha(opacity=100); -ms-filter: alpha(opacity=100);}
+
+
+
+
+/* ---------------------------------------------- */
+/* ---------- BOXES: STRUCTURE ------------------ */
+/* ---------------------------------------------- */
+
+/* Injection */
+.less_box_embedded {/* no styling for now bc this is outside like, reviews, so no border */}
+    /* less_rrwidget/less_rrcontainer or injection zone. */
+
+
+/* UGC */
+.less_box_ugcWrapper {background-color: @less_box_colorPrimaryFadeder;} /* Wrapper around multi-UGC */ /* bug crapper */
+.less_box_ugc {background-color: @less_box_colorBase;} /* Single piece of UGC */
+    .less_box_subUgcWrapper {background-color: @less_box_colorPrimaryFadedest;}
+    .less_box_subUgc {background-color: @less_box_colorBase;} /* sub ugc, like answer or comment. graphical elements like comment arrows need revisiting due to bg color changes */
+    .less_box_quotedUgc {background-color: @less_box_colorBase; .less_box_borderLight; .less_box_borderWidthLarge; .less_box_opacity70;} /* Quoted (threaded with child content emphasized, like showing question on answer submission. or something.) */
+
+
+/* Dashboard */
+.less_box_dashboard {.less_box_borderLight; .less_box_borderBottom;} /* quicktake only for now but could be other dash-y stuff */
+    .less_box_summary {} /* Rating Summary as appears anywhere, but it's a dashboard type item providing meta information */
+    .less_box_filtering {.less_box_borderMed;} /* Filtering */
+        .less_box_filterDimension {background-color: @less_box_colorPrimaryFadeder;} /* Filter Item title */
+        .less_box_filterItem {/* font size */}
+
+
+/* Toolbars */
+.less_box_toolbar {background-color: @less_box_colorBase; .less_box_borderLight; .less_box_borderHorizontal;} /* Toolbar */ /* todo fix */
+    .less_box_sort {} /* Sort */
+    .less_box_search {}  /* Search */
+    .less_box_pagination {background-color: @less_box_colorBase; .less_box_borderLight; .less_box_borderHorizontal;}  /* Pagination */
+
+
+/* Popin */
+.less_box_popin {background-color: @less_box_colorBase; .less_box_borderDark; .less_box_shadow;} /* Popin, as in Mary. but not. */
+    .less_box_fakeSelect {.less_box_borderLight; background: @less_box_colorPrimaryFadedest;} /* Faux select box - category dropdown in microsite, filtering dropdowns to look like a select box? */
+    .less_box_fakeSelectOpen {.less_box_fakeSelect; background: @less_box_colorBase; .less_box_borderHighlight; color: @less_text_colorHigh;} /* hover/expanded states */
+        .less_box_fakeSelectOptions {.less_box_borderLight; .less_box_borderBottom; background: @less_box_colorBase;} /* select dropdown options */
+        .less_box_fakeSelectOptionsHover {.less_box_borderHighlight; background: @less_box_colorPrimaryFadedest;}
+    .less_box_pane {} /* Internal scrolling area, like in product picker. not necessarily in a popin. it's just pain. */
+
+/* TODO: Clarify for what we use "Meta". */
+/* UGC meta */
+.less_box_meta {background-color: @less_box_colorPrimaryFadedest;} /* UGC meta information */
+    .less_box_media {.less_box_borderLight; .less_box_borderBottom; background-color: @less_box_colorBase;} /*  Media, photo/video, secondary ratings?, product linking etc */
+    .less_box_user {background-color: @less_box_colorPrimaryFadedest;} /* User sections, signatures, avatar */
+
+
+/* Messages / Alerts */
+.less_box_alert {.less_box_borderLight;} /* Alert */
+.less_box_alertGood {.less_box_borderGood; color: @less_text_colorAlertGood;} /* Good */
+.less_box_alertBad {.less_box_borderBad;  color: @less_text_colorAlertBad;} /* Bad */
+
+/* Forms */
+.less_box_form {} /* Form */
+    .less_box_formSection {.less_box_borderDark; .less_box_borderBottom;} /* Sections */
+        .less_box_formHeader {.less_box_borderMed; .less_box_borderBottom;} /* Header */
+        .less_box_formBody {} /* Body */
+            .less_box_info {} /* Info */
+
+
+/* Pages */
+.less_box_page {background-color: @less_box_colorPrimaryFadeder;} /* page - standalone page, .less_xxroot */
+    .less_box_pageHeader {background-color: @less_box_colorPrimaryFadedest;} /* Page header */
+    .less_box_sidebar {background-color: @less_box_colorPrimaryFadedest;} /* Sidebar */
+    .less_box_pageContent {background-color: @less_box_colorBase;} /* Page content */
+        .less_box_subjectList {background-color: @less_box_colorPrimaryFadedest;} /* Product / Category list */
+            .less_box_subjectItem {background-color: @less_box_colorBase;} /* Product/Category listing item */
+
+
+/* Tab Groups */
+.less_box_tabGroup {} /* Tab Groups */
+ .less_box_tab {} /* Tab */
+ .less_box_tabActive {} /* Active */
+ .less_box_tabHover {} /* Hover */
+
+/* TODO: Clarify the use of "Widget" too */
+/* Widget */
+.less_box_widget {background-color: @less_box_colorBase;} /* Widget */
+.less_box_titleWidget {.less_box_borderMed; .less_box_borderHorizontal;}
+.less_box_nav {.less_box_borderLight; background: @less_box_colorBase;} /* "Internal" Nav */
+    .less_box_subNav {} /* Subnav */
+        .less_box_subSubNav {} /* Subsubnav */
+    .less_box_navListItem {.less_box_borderLight; .less_box_borderBottom;} /* Nav List items */
